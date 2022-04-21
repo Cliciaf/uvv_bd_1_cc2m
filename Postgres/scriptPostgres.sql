@@ -23,12 +23,12 @@ CREATE DATABASE uvv
 
 \connect uvv
 -- Criando o schema uvv.elmasri
-CREATE SCHEMA IF NOT EXISTS uvv.elmasri
+CREATE SCHEMA IF NOT EXISTS elmasri
     AUTHORIZATION clicia;
 
 -- trocando para o schema uvv.elmasri
 ALTER USER clicia
-SET SEARCH_PATH TO uvv.elmasri, 'clicia', public;
+SET SEARCH_PATH TO elmasri, 'clicia', public;
 
 
 -- Criando as relações do schema
