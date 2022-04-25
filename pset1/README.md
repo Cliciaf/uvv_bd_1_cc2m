@@ -1,12 +1,10 @@
-# uvv_bd_1_cc2m
-# UNIVERSIDADE DE VILA VELHA - UVV
+## uvv_bd_1_cc2m
+># UNIVERSIDADE DE VILA VELHA - UVV
 ---
 
-# ***Projeto De Design e Desenvolvimento de Bancos de Dados*** - Prof. Abrantes Araújo Silva Filho 
+## ***Projeto De Design e Desenvolvimento de Bancos de Dados*** - Prof. Abrantes Araújo Silva Filho 
 ---
-## O projeto PSET1, ou Problem SET 1, é um conjunto de tarefas difíceis (algumas extremamente difíceis)
-
-### O PSET1 é uma das atividades pontuadas que teram o peso de 45% da nota final da disciplina 
+## O projeto PSET1, é um conjunto de tarefas difíceis (algumas extremamente difíceis)
 ---
 ## Esté PSET1 tem quatro grandes objetivos:
 
