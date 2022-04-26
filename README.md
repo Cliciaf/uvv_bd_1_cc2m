@@ -10,5 +10,5 @@
 ### Periodo: 2º
 ### Professor: Abrantes Araújo Silva Filho
 ### Diciplina: Design e Desenvolvimento de Bancos de Dados
-### Aluna: Clícia Pereira de Freitas
+### Alunos: Clícia Pereira de Freitas e Vinicius Teixeira Melo.
 ---
