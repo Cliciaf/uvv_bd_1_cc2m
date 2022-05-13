@@ -50,12 +50,12 @@ WHERE d.numero_departamento = f.numero_departamento
 ORDER BY d.nome_departamento ASC, f.salario DESC;
 
 -- 7 Relatório com o nome completo dos funcionários que possuem pelo menos um dependente, o departamento onde trabalham e o nome completo, idade e sexo do(s) dependente(s)
-SELECT dt.nome_departamento, (f.primeiro_nome ||' '|| f.nome_meio ||' '|| f.ultimo_nome) AS nome_funcionário, dp.nome_dependente, DATE_PART('year', AGE(dp.data_nascimento)) AS idade_dependente, (CASE WHEN(dp.sexo = 'M') THEN 'Masculino' WHEN (dp.sexo = 'F') THEN 'Feminino' END) AS sexo
+SELECT depar.nome_departamento, (f.primeiro_nome ||' '|| f.nome_meio ||' '|| f.ultimo_nome) AS nome_funcionário, depen.nome_dependente, DATE_PART('year', AGE(depen.data_nascimento)) AS idade_dependente, (CASE WHEN(depen.sexo = 'M') THEN 'Masculino' WHEN (depen.sexo = 'F') THEN 'Feminino' END) AS sexo
 FROM funcionario AS f
 INNER JOIN
-dependente AS dp ON dp.cpf_funcionario = f.cpf
+dependente AS depen ON depen.cpf_funcionario = f.cpf
 INNER JOIN
-departamento AS dt ON dt.numero_departamento = f.numero_departamento;
+departamento AS depar ON depar.numero_departamento = f.numero_departamento;
 
 -- 8 Relatório com o nome completo, departamento e salário de cada funcionário que não possui dependente
 SELECT (f.primeiro_nome ||' '|| f.nome_meio ||' '|| f.ultimo_nome) AS nome_funcionário, d.nome_departamento, CAST(salario AS DECIMAL(10,2))
@@ -84,7 +84,7 @@ GROUP BY d.nome_departamento, p.nome_projeto
 ORDER BY d.nome_departamento ASC;
 
 -- 11 Relatório do nome completo do funcionário, nome do projeto em que ele trabalha e o valor que ele receberá referente às horas trabalhadas neles, considerando 50 reais por hora
-SELECT (f.primeiro_nome ||' '|| f.nome_meio ||' '|| f.ultimo_nome) AS nome_funcionário, p.nome_projeto, CAST(t.horas*50 AS DECIMAL (10,2)) AS valor_pagamento
+SELECT (f.primeiro_nome ||' '|| f.nome_meio ||' '|| f.ultimo_nome) AS nome_completo_f, p.nome_projeto, CAST(t.horas*50 AS DECIMAL (10,2)) AS valor_pagamento
 FROM funcionario AS f
 INNER JOIN
 trabalha_em AS t ON t.cpf_funcionario = f.cpf
@@ -102,15 +102,15 @@ INNER JOIN
 departamento AS d ON d.numero_departamento = p.numero_departamento;
 
 -- 13 Relatório que exibe o nome completo, sexo e idade de todos os funcionários e seus dependentes em ordem decrescente da idade em anos completos
-SELECT (f.primeiro_nome ||' '|| f.nome_meio ||' '|| f.ultimo_nome) AS nome, f.sexo, DATE_PART('year', AGE(f.data_nascimento)) AS idade
+SELECT (f.primeiro_nome ||' '|| f.nome_meio ||' '|| f.ultimo_nome) AS nome_completo, f.sexo, DATE_PART('year', AGE(f.data_nascimento)) AS idade
 FROM funcionario AS f
 UNION
-SELECT dp.nome_dependente AS nome, dp.sexo, DATE_PART('year', AGE(dp.data_nascimento)) AS idade
-FROM dependente AS dp
+SELECT depen.nome_dependente AS nome, depen.sexo, DATE_PART('year', AGE(depen.data_nascimento)) AS idade
+FROM dependente AS depen
 ORDER BY idade DESC;
 
 -- 14 Relatório que exibe a quantidade de funcionários de cada departamento
-SELECT d.nome_departamento, COUNT(f.cpf) AS numero_funcionarios
+SELECT d.nome_departamento, COUNT(f.cpf) AS quantidade_funcionarios
 FROM funcionario AS f
 INNER JOIN
 departamento AS d ON d.numero_departamento = f.numero_departamento
