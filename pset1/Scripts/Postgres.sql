@@ -62,13 +62,17 @@ ALTER TABLE funcionario ADD CONSTRAINT ck_func_salario
 CHECK (salario >= 0);
 
 -- Comentários da tabela funcionário:
-COMMENT ON TABLE funcionario IS 'Tabela que armazena informações dos funcionários.';
-COMMENT ON COLUMN funcionario.cpf IS '';
-COMMENT ON COLUMN funcionario. IS '';
-COMMENT ON COLUMN funcionario. IS '';
-COMMENT ON COLUMN funcionario. IS '';
-COMMENT ON COLUMN funcionario. IS '';
-COMMENT ON COLUMN funcionario. IS '';
+COMMENT ON TABLE elmasri.funcionario IS 'Tabela que armazena as informações dos funcionários.';
+COMMENT ON COLUMN elmasri.funcionario.cpf IS 'CPF do funcionário. Será a PK da tabela.';
+COMMENT ON COLUMN elmasri.funcionario.primeiro_nome IS 'Primeiro nome do funcionário.';
+COMMENT ON COLUMN elmasri.funcionario.nome_meio IS 'Letra inicial do nome do meio.';
+COMMENT ON COLUMN elmasri.funcionario.ultimo_nome IS 'Sobrenome do funcionário.';
+COMMENT ON COLUMN elmasri.funcionario.data_nascimento IS 'Data de nascimento do funcionário.';
+COMMENT ON COLUMN elmasri.funcionario.endereco IS 'Endereço do funcionário.';
+COMMENT ON COLUMN elmasri.funcionario.sexo IS 'Sexo do funcionário.';
+COMMENT ON COLUMN elmasri.funcionario.salario IS 'Salário do funcionário.';
+COMMENT ON COLUMN elmasri.funcionario.cpf_supervisor IS 'CPF do supervisor será uma FK para a própria tabela (um auto-relacionamento).';
+COMMENT ON COLUMN elmasri.funcionario.numero_departamento IS 'Número do departamento do funcionário.';
 
 -- Cria a tabela dependente:
 CREATE TABLE dependente (
@@ -90,6 +94,12 @@ FOREIGN KEY (cpf_funcionario) REFERENCES funcionario (cpf);
 ALTER TABLE dependente ADD CONSTRAINT ck_depend_sexo
 CHECK (sexo IN ('M', 'F'));
 
+COMMENT ON TABLE elmasri.dependente IS 'Tabela que armazena as informações dos dependentes dos funcionários.';
+COMMENT ON COLUMN elmasri.dependente.cpf_funcionario IS 'CPF do funcionário faz parte da PK desta tabela e é uma FK para a tabela funcionário.';
+COMMENT ON COLUMN elmasri.dependente.nome_dependente IS 'Nome do dependente faz parte da PK desta tabela.';
+COMMENT ON COLUMN elmasri.dependente.sexo IS 'Sexo do dependente.';
+COMMENT ON COLUMN elmasri.dependente.data_nascimento IS 'Data de nascimento do dependente.';
+COMMENT ON COLUMN elmasri.dependente.parentesco IS 'Descrição do parentesco do dependente com o funcionário.';
 
 -- Cria a tabela departamento:
 CREATE TABLE departamento (
@@ -98,6 +108,12 @@ CREATE TABLE departamento (
     cpf_gerente         CHAR(11)    CONSTRAINT nn_dept_cpf_gerent NOT NULL,
     data_inicio         DATE
 );
+
+COMMENT ON TABLE elmasri.departamento IS 'Tabela que armazena as informaçoẽs dos departamentos.';
+COMMENT ON COLUMN elmasri.departamento.numero_departamento IS 'Número do departamento é a PK desta tabela.';
+COMMENT ON COLUMN elmasri.departamento.nome_departamento IS 'Nome do departamento deve ser único.';
+COMMENT ON COLUMN elmasri.departamento.cpf_gerente IS 'CPF do gerente do departamento é uma FK para a tabela funcionários.';
+COMMENT ON COLUMN elmasri.departamento.data_inicio_gerente IS 'Data do início do gerente no departamento.';
 
 -- Cria chaves da tabela departamento:
 ALTER TABLE departamento ADD CONSTRAINT pk_departamento
@@ -114,6 +130,7 @@ CREATE UNIQUE INDEX uidx_dept_nome_dept ON departamento (nome_departamento);
 -- Constraints adicionais para a tabela departamento:
 ALTER TABLE departamento ADD CONSTRAINT ck_dept_num_dept
 CHECK (numero_departamento >= 0);
+
 
 -- Cria a tabela localizações do departamento:
 CREATE TABLE localizacoes_departamento (
@@ -136,6 +153,11 @@ CREATE TABLE projeto (
     numero_departamento INT         CONSTRAINT nn_proj_num_dept  NOT NULL
 );
 
+COMMENT ON TABLE elmasri.projeto IS 'Tabela que armazena as informações sobre os projetos dos departamentos.';
+COMMENT ON COLUMN elmasri.projeto.numero_projeto IS 'Número do projeto é a PK desta tabela.';
+COMMENT ON COLUMN elmasri.projeto.nome_projeto IS 'Nome do projeto deve ser único.';
+COMMENT ON COLUMN elmasri.projeto.local_projeto IS 'Localização do projeto.';
+COMMENT ON COLUMN elmasri.projeto.numero_departamento IS 'Número do departamento é uma FK para a tabela departamento.';
 -- Cria chaves da tabela projeto:
 ALTER TABLE projeto ADD CONSTRAINT pk_projeto
 PRIMARY KEY (numero_projeto);

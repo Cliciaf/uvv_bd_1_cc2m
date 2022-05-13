@@ -8,7 +8,6 @@ GROUP BY d.nome_departamento;
 
 -- 2 prepare um relatório que mostre a média salarial dos homens e das mulheres.
 
-
 SELECT (CASE WHEN(f.sexo = 'M') THEN 'Homens' END) AS sexo, CAST(AVG(salario) AS DECIMAL(10, 2)) AS media_por_sexo
 FROM funcionario AS f
 WHERE f.sexo = 'M'
